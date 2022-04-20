@@ -9,7 +9,7 @@ void setup() {
 
   dwin_setup();
 
-  err = DWIN_SET(v1);
+  err = DWIN_SET(v1,sizeof(v1));
 
 }
 

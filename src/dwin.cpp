@@ -78,10 +78,10 @@ return DISP_DAT_READ;
 * This function is used to set voltage,current and energy.
 */
 
-uint8_t DWIN_SET(unsigned char *val)
+uint8_t DWIN_SET(unsigned char *val,size_t len)
 {
 //Serial.write(val, 8);
-if(dwin.write(val,sizeof(val)))
+if(dwin.write(val,len))
 {
 return DISP_OK;
 }
