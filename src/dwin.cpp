@@ -30,15 +30,29 @@ unsigned char Buffer_Len = 0;
 unsigned char tcount = 0;
 
 
-unsigned char v1[8] = {0X5A, 0XA5, 0X05, 0X82, 0X54, 0X20, 0X00, 0X23};
-unsigned char v2[8] = {0X5A, 0XA5, 0X05, 0X82, 0X54, 0X20, 0X00, 0X23};
-unsigned char v3[8] = {0X5A, 0XA5, 0X05, 0X82, 0X54, 0X20, 0X00, 0X23};
-unsigned char i1[8] = {0X5A, 0XA5, 0X05, 0X82, 0X54, 0X20, 0X00, 0X23};
-unsigned char i2[8] = {0X5A, 0XA5, 0X05, 0X82, 0X54, 0X20, 0X00, 0X23};
-unsigned char i3[8] = {0X5A, 0XA5, 0X05, 0X82, 0X54, 0X20, 0X00, 0X23};
-unsigned char e1[8] = {0X5A, 0XA5, 0X05, 0X82, 0X54, 0X20, 0X00, 0X23};
-unsigned char e2[8] = {0X5A, 0XA5, 0X05, 0X82, 0X54, 0X20, 0X00, 0X23};
-unsigned char e3[8] = {0X5A, 0XA5, 0X05, 0X82, 0X54, 0X20, 0X00, 0X23};
+/* @brief: The follow is a lookup table
+ * Table : This makes implementation faster
+ */ 
+const unsigned char ct[22]  =  {0X5A, 0XA5, 0X13, 0X82,0X52,0X00,0X43,0X6F,0X6E,0X6E,0X65,0X63,0X74,0X65,0X64,0X20,0X20,0X20,0X20,0X20,0X20,0X20};//connected
+const unsigned char nct[22] =  {0X5A, 0XA5, 0X13, 0X82,0X52,0X00,0X6E,0X6F,0X74,0X20,0X43,0X6F,0X6E,0X6E,0X65,0X63,0X74,0X65,0X64,0X20,0X20,0X20};//not connected 
+const unsigned char et[22]  =  {0X5A, 0XA5, 0X13, 0X82,0X52,0X00,0X45,0X74,0X68,0X65,0X72,0X6E,0X65,0X74,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20};//ethernet
+const unsigned char wi[22]  =  {0X5A, 0XA5, 0X13, 0X82,0X52,0X00,0X57,0X69,0X66,0X69,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20};//wifi
+const unsigned char tr[22]  =  {0X5A, 0XA5, 0X13, 0X82,0X54,0X00,0X54,0X61,0X70,0X20,0X52,0X46,0X49,0X44,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20};//tap rfid
+const unsigned char utr[22] =  {0X5A, 0XA5, 0X13, 0X82,0X54,0X00,0X52,0X46,0X49,0X44,0X20,0X75,0X6E,0X61,0X76,0X61,0X69,0X6C,0X61,0X6C,0X65,0X20};//rfid unavailable
+const unsigned char g[22] =    {0X5A, 0XA5, 0X13, 0X82,0X52,0X00,0X34,0X47,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20};//4g
+
+unsigned char clu[22]  =  {0X5A, 0XA5, 0X13, 0X82,0X45,0X00,0X43,0X6F,0X6E,0X6E,0X65,0X63,0X74,0X65,0X64,0X20,0X20,0X20,0X20,0X20,0X20,0X20};//connected
+unsigned char clun[22] =  {0X5A, 0XA5, 0X13, 0X82,0X45,0X00,0X6E,0X6F,0X74,0X20,0X43,0X6F,0X6E,0X6E,0X65,0X63,0X74,0X65,0X64,0X20,0X20,0X20};//not connected 
+
+unsigned char v1[8] = {0X5A, 0XA5, 0X05, 0X82, 0X43, 0X00, 0X00, 0X23};
+unsigned char v2[8] = {0X5A, 0XA5, 0X05, 0X82, 0X31, 0X00, 0X00, 0X23};
+unsigned char v3[8] = {0X5A, 0XA5, 0X05, 0X82, 0X19, 0X00, 0X00, 0X23};
+unsigned char i1[8] = {0X5A, 0XA5, 0X05, 0X82, 0X40, 0X00, 0X00, 0X23};
+unsigned char i2[8] = {0X5A, 0XA5, 0X05, 0X82, 0X28, 0X00, 0X00, 0X23};
+unsigned char i3[8] = {0X5A, 0XA5, 0X05, 0X82, 0X16, 0X00, 0X00, 0X23};
+unsigned char e1[8] = {0X5A, 0XA5, 0X05, 0X82, 0X37, 0X00, 0X00, 0X23};
+unsigned char e2[8] = {0X5A, 0XA5, 0X05, 0X82, 0X25, 0X00, 0X00, 0X23};
+unsigned char e3[8] = {0X5A, 0XA5, 0X05, 0X82, 0X13, 0X00, 0X00, 0X23};
 
 /*
 * @brief: DWIN_read 
